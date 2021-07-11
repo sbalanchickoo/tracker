@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_title %}Add grouping{% endblock %}
+{% block body %}
+    <form method="post">
+        <p>
+            Category
+            <input type="text" name="category">
+        </p>
+        <p>
+            Subcategory
+            <input type="text" name="subcategory">
+        </p>
+        <button type="submit">Submit</button>
+    </form>
+
+    </br>
+    <a href=" {{url_for('welcome') }}"> Go back to the welcome page </a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block page_title %}Subcategories{% endblock %}
+{% block body %}
+    <h1>
+        Sub-categories
+    </h1>
+     <p>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Action</th>
+        </tr>
+        {% for grouping in groupings %}
+        <tr>
+            <td>{{ grouping['category'] }}</td>
+            <td><a href=" {{url_for('get_grouping', index = grouping['id']) }}"> {{ grouping['subcategory'] }} </a></td>
+            <td><a href=" {{url_for('delete_grouping', index = grouping['id']) }}"> Delete </a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </br>
+    <a href=" {{url_for('welcome') }}"> Go back to the welcome page </a>
+{% endblock %}

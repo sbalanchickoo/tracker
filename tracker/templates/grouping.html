@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block page_title %}Subcategory{% endblock %}
+{% block body %}
+    <br>
+        Category: {{ category }}
+    </br>
+    <br>
+        Subcategory: {{ subcategory }}
+    </br>
+    <p>
+        <br>
+        <a href=" {{url_for('welcome') }}">
+                Back to start
+        </a>
+        <br>
+        <button>
+            <a href=" {{url_for('get_all_grouping') }}">
+                Back to list
+            </a>
+        </button>
+    </p>
+{% endblock %}
