@@ -1,5 +1,5 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
-from tracker import app, db
+from . import app, db
 from tracker.model.grouping import Grouping
 
 
