@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from config import Config, DevelopmentConfig, ProductionConfig
+from config import DevelopmentConfig, ProductionConfig
 
 # initialize app
 # constructor - pass name of the application

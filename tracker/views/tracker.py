@@ -1,7 +1,8 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from tracker.model.grouping import Grouping
-from tracker import db, app
+# from tracker.model.grouping import Grouping
+from ..model.grouping import Grouping
+from .. import app, db
 # import os #
 # from config import DevelopmentConfig, ProductionConfig #
 
@@ -18,7 +19,7 @@ from tracker import db, app
 
 # import model objects so that they will be created if not already exist
 # even though below line is greyed out, it is essential, so that the db objects knows of the model objects
-from .model import grouping, expense
+# from  import grouping, expense
 db.create_all()
 db.session.commit()
 
