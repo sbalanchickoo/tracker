@@ -3,3 +3,4 @@ Flask-SQLAlchemy==2.5.1
 Jinja2==3.0.0
 psycopg2==2.8.6
 SQLAlchemy==1.4.19
+python3-flask

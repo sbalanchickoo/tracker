@@ -1,5 +1,5 @@
-# from tracker import db
-from ..tracker import db #
+from tracker import db
+# from ..main import db #
 
 class Grouping(db.Model):
     __tablename__ = 'grouping'
