@@ -40,3 +40,6 @@
 # @app.route('/grouping/<string:subcategory>')
 # subcategory = subcategory.lower()
 #     grouping_set = Grouping.query.filter(func.lower(Grouping.subcategory) == subcategory).first()
+
+# import os
+# >>> os.urandom(24)

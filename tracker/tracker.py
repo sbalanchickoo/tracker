@@ -1,11 +1,13 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
-from tracker import app
+from tracker import app, db
 from tracker.model.grouping import Grouping
-from sqlalchemy import func
 
-# constructor - pass name of the application
-# __name__ is a special variable representing name of current module
-# app = Flask(__name__)
+
+# import model objects so that they will be created if not already exist
+# even though below line is greyed out, it is essential, so that the db objects knows of the model objects
+from .model import expense, grouping
+db.create_all()
+db.session.commit()
 
 
 # the decorator turns this function to a view function
@@ -95,3 +97,7 @@ def delete_grouping(index):
                                    , subcategory=result['subcategory'])
     else:
         return abort(404)
+
+# set FLASK_APP=tracker.py
+# set FLASK_ENV=development
+# flask run
