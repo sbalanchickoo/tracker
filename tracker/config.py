@@ -23,5 +23,5 @@ class ProductionConfig(Config):
     DB_NAME = "tracker"
     DB_USERNAME = "postgres"
     DB_PASSWORD = "gt"
-    SQLALCHEMY_DATABASE_URI = f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@ubuntu2:5432/{DB_NAME}"
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@172.30.40.2:5432/{DB_NAME}"
 
