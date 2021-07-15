@@ -15,3 +15,5 @@ elif app.config["ENV"] == "development":
 
 # initialize db
 db = SQLAlchemy(app)
+
+# pip list --format=freeze > requirements.txt
