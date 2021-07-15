@@ -1,4 +1,5 @@
-from tracker import db
+# from tracker import db
+from ..tracker import db #
 
 
 class Expense(db.Model):

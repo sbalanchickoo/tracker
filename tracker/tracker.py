@@ -1,7 +1,21 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
-from . import app, db
+from flask_sqlalchemy import SQLAlchemy
+from tracker import db
 from tracker.model.grouping import Grouping
+import os #
+from .config import Config, DevelopmentConfig, ProductionConfig #
 
+app = Flask(__name__) #
+try: #
+    env = os.environ['ENV'] #
+except: #
+    env = app.config["ENV"] #
+if env == "production": #
+    app.config.from_object(ProductionConfig) #
+elif env == "development": #
+    app.config.from_object(DevelopmentConfig) #
+
+db = SQLAlchemy(app) #
 
 # import model objects so that they will be created if not already exist
 # even though below line is greyed out, it is essential, so that the db objects knows of the model objects
