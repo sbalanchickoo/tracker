@@ -1,8 +1,9 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 # from tracker.model.grouping import Grouping
-from .model.grouping import Grouping
-from tracker import app, db
+# from .model.grouping import Grouping
+import tracker.model.grouping as grouping
+import tracker
 # import os #
 # from config import DevelopmentConfig, ProductionConfig #
 
@@ -20,6 +21,8 @@ from tracker import app, db
 # import model objects so that they will be created if not already exist
 # even though below line is greyed out, it is essential, so that the db objects knows of the model objects
 # from  import grouping, expense
+db = tracker.db
+app = tracker.app
 db.create_all()
 db.session.commit()
 
@@ -33,10 +36,10 @@ def welcome():
 
 @app.route('/subcategory/<int:index>')
 def get_grouping(index):
-    grouping = Grouping.query.filter(Grouping.id == index).first()
+    result_set = grouping.Grouping.query.filter(grouping.Grouping.id == index).first()
 
     if grouping is not None:
-        result = grouping.serialize
+        result = result_set.serialize
         return render_template('grouping.html'
                                , category=result['category']
                                , subcategory=result['subcategory']
@@ -48,13 +51,13 @@ def get_grouping(index):
 
 @app.route('/subcategory-list')
 def get_all_grouping():
-    grouping = Grouping.query.all()
+    result_set = grouping.Grouping.query.all()
 
-    if grouping is not None:
-        result = [i.serialize for i in grouping]
-        ids = [i['id'] for i in result]
+    if result_set is not None:
+        result_set_serialized = [i.serialize for i in result_set]
+        ids = [i['id'] for i in result_set_serialized]
         return render_template('all-grouping.html'
-                               , groupings=result
+                               , groupings=result_set_serialized
                                , ids=ids
                                )
     else:
@@ -63,21 +66,21 @@ def get_all_grouping():
 
 @app.route('/api/subcategory/<int:index>')
 def api_get_grouping(index):
-    grouping = Grouping.query.filter(Grouping.id == index).first()
+    result_set = grouping.Grouping.query.filter(grouping.Grouping.id == index).first()
 
     if grouping is not None:
-        result = grouping.serialize
-        return jsonify(result)
+        result_set_serialized = result_set.serialize
+        return jsonify(result_set_serialized)
     else:
         return abort(404)
 
 
 @app.route('/api/subcategory-list')
 def api_get_all_grouping():
-    grouping = Grouping.query.all()
+    result_set = grouping.Grouping.query.all()
 
     if grouping is not None:
-        result = [i.serialize for i in grouping]
+        result = [i.serialize for i in result_set]
         return jsonify(result)
     else:
         return abort(404)
@@ -86,8 +89,8 @@ def api_get_all_grouping():
 @app.route('/add-subcategory', methods=['GET', 'POST'])
 def add_grouping():
     if request.method == 'POST':
-        new_grouping = Grouping(category=request.form['category'], subcategory=request.form['subcategory'])
-        status = Grouping.add_grouping(new_grouping)
+        new_grouping = grouping.Grouping(category=request.form['category'], subcategory=request.form['subcategory'])
+        status = grouping.Grouping.add_grouping(new_grouping)
         if status == 'pass':
             return redirect(url_for('get_all_grouping'))
         else:
@@ -98,17 +101,17 @@ def add_grouping():
 
 @app.route('/delete-subcategory/<int:index>', methods=['GET', 'POST'])
 def delete_grouping(index):
-    grouping = Grouping.query.filter(Grouping.id == index).first()
+    result_set = grouping.Grouping.query.filter(grouping.Grouping.id == index).first()
     if grouping is not None:
-        result = grouping.serialize
+        result_set_serialized = result_set.serialize
 
         if request.method == 'POST':
-            Grouping.delete_grouping(grouping)
+            grouping.Grouping.delete_grouping(grouping)
             return redirect(url_for('get_all_grouping'))
         else:
             return render_template('delete-grouping.html'
-                                   , category=result['category']
-                                   , subcategory=result['subcategory'])
+                                   , category=result_set_serialized['category']
+                                   , subcategory=result_set_serialized['subcategory'])
     else:
         return abort(404)
 
