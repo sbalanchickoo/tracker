@@ -1,7 +1,7 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 # from tracker.model.grouping import Grouping
-from tracker.model.grouping import Grouping
+from .model.grouping import Grouping
 from tracker import app, db
 # import os #
 # from config import DevelopmentConfig, ProductionConfig #

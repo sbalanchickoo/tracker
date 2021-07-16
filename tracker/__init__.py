@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from tracker.config import DevelopmentConfig, ProductionConfig
+import os, sys; sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 # initialize app
 # constructor - pass name of the application
