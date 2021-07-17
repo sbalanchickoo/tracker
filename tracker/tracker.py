@@ -26,8 +26,11 @@ from flask_sqlalchemy import SQLAlchemy
 # from tracker.config import DevelopmentConfig, ProductionConfig
 # from tracker.config import DevelopmentConfig, ProductionConfig
 import os
+import config
+# from setup import create_app
 app = Flask(__name__)
 
+# message = setup_mod.create_app()
 # env refers to the FLASK_ENV environment variable which can be used to determine config that will be used
 # try:
 #     # works on linux
@@ -58,6 +61,7 @@ app = Flask(__name__)
 # app.route is an attribute of the app object above
 @app.route('/')
 def welcome():
+    # message = tracker.create_app()
     return "Hello, world"# render_template('welcome.html')
 
 
