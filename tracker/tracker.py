@@ -21,7 +21,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 
-import tracker.config as config
+# import config
 # import models.grouping
 # from tracker.config import DevelopmentConfig, ProductionConfig
 # from tracker.config import DevelopmentConfig, ProductionConfig
@@ -29,17 +29,17 @@ import os
 app = Flask(__name__)
 
 # env refers to the FLASK_ENV environment variable which can be used to determine config that will be used
-try:
-    # works on linux
-    env = os.environ['ENV']
-except:
-    # works on windows
-    env = app.config["ENV"]
-
-if env == "production":
-    app.config.from_object(config.ProductionConfig)
-elif env == "development":
-    app.config.from_object(config.DevelopmentConfig)
+# try:
+#     # works on linux
+#     env = os.environ['ENV']
+# except:
+#     # works on windows
+#     env = app.config["ENV"]
+#
+# if env == "production":
+#     app.config.from_object(config.ProductionConfig)
+# elif env == "development":
+#     app.config.from_object(config.DevelopmentConfig)
 
 # initialize db
 # db = SQLAlchemy(app)
