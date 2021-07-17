@@ -21,8 +21,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 
-
-from tracker.config import DevelopmentConfig, ProductionConfig
+import config
+# from tracker.config import DevelopmentConfig, ProductionConfig
 # from tracker.config import DevelopmentConfig, ProductionConfig
 import os
 app = Flask(__name__)
@@ -36,9 +36,9 @@ except:
     env = app.config["ENV"]
 
 if env == "production":
-    app.config.from_object(ProductionConfig)
+    app.config.from_object(config.ProductionConfig)
 elif env == "development":
-    app.config.from_object(DevelopmentConfig)
+    app.config.from_object(config.DevelopmentConfig)
 
 # initialize db
 # db = SQLAlchemy(app)
