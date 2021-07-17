@@ -1,4 +1,5 @@
 import run
+import models.grouping as grouping
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
@@ -63,7 +64,7 @@ db, app = run.create_app()
 def welcome():
     # message = setup_mod.create_app()
     # return message
-    return "Hello, world"# render_template('welcome.html')
+    return render_template('welcome.html')
 
 
 # @app.route('/subcategory/<int:index>')
@@ -81,19 +82,19 @@ def welcome():
 #         return abort(404)
 #
 #
-# @app.route('/subcategory-list')
-# def get_all_grouping():
-#     result_set = Grouping.query.all()
-#
-#     if result_set is not None:
-#         result_set_serialized = [i.serialize for i in result_set]
-#         ids = [i['id'] for i in result_set_serialized]
-#         return render_template('all-grouping.html'
-#                                , groupings=result_set_serialized
-#                                , ids=ids
-#                                )
-#     else:
-#         return abort(404)
+@app.route('/subcategory-list')
+def get_all_grouping():
+    result_set = grouping.Grouping.query.all()
+
+    if result_set is not None:
+        result_set_serialized = [i.serialize for i in result_set]
+        ids = [i['id'] for i in result_set_serialized]
+        return render_template('all-grouping.html'
+                               , groupings=result_set_serialized
+                               , ids=ids
+                               )
+    else:
+        return abort(404)
 #
 #
 # @app.route('/api/subcategory/<int:index>')
