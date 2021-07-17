@@ -1,5 +1,11 @@
-from tracker import db
-# from ..main import db #
+# import tracker as glo
+# from run import db
+# import tracker.run
+# from tracker import db
+# db = run.db
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
+
 
 class Grouping(db.Model):
     __tablename__ = 'grouping'
