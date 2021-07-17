@@ -1,3 +1,4 @@
+import run
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
@@ -25,25 +26,23 @@ from flask_sqlalchemy import SQLAlchemy
 # import models.grouping
 # from tracker.config import DevelopmentConfig, ProductionConfig
 # from tracker.config import DevelopmentConfig, ProductionConfig
-import os
-import config
-import setup_mod
+
 # from setup import create_app
-app = Flask(__name__)
+db, app = run.create_app()
 
 # message = setup_mod.create_app()
 # env refers to the FLASK_ENV environment variable which can be used to determine config that will be used
-try:
-    # works on linux
-    env = os.environ['ENV']
-except:
-    # works on windows
-    env = app.config["ENV"]
-
-if env == "production":
-    app.config.from_object(config.ProductionConfig)
-elif env == "development":
-    app.config.from_object(config.DevelopmentConfig)
+# try:
+#     # works on linux
+#     env = os.environ['ENV']
+# except:
+#     # works on windows
+#     env = app.config["ENV"]
+#
+# if env == "production":
+#     app.config.from_object(config.ProductionConfig)
+# elif env == "development":
+#     app.config.from_object(config.DevelopmentConfig)
 
 # initialize db
 # db = SQLAlchemy(app)
@@ -62,9 +61,9 @@ elif env == "development":
 # app.route is an attribute of the app object above
 @app.route('/')
 def welcome():
-    message = setup_mod.create_app()
-    return message
-    # return "Hello, world"# render_template('welcome.html')
+    # message = setup_mod.create_app()
+    # return message
+    return "Hello, world"# render_template('welcome.html')
 
 
 # @app.route('/subcategory/<int:index>')
