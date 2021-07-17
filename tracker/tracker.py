@@ -27,22 +27,23 @@ from flask_sqlalchemy import SQLAlchemy
 # from tracker.config import DevelopmentConfig, ProductionConfig
 import os
 import config
+import setup_mod
 # from setup import create_app
 app = Flask(__name__)
 
 # message = setup_mod.create_app()
 # env refers to the FLASK_ENV environment variable which can be used to determine config that will be used
-# try:
-#     # works on linux
-#     env = os.environ['ENV']
-# except:
-#     # works on windows
-#     env = app.config["ENV"]
-#
-# if env == "production":
-#     app.config.from_object(config.ProductionConfig)
-# elif env == "development":
-#     app.config.from_object(config.DevelopmentConfig)
+try:
+    # works on linux
+    env = os.environ['ENV']
+except:
+    # works on windows
+    env = app.config["ENV"]
+
+if env == "production":
+    app.config.from_object(config.ProductionConfig)
+elif env == "development":
+    app.config.from_object(config.DevelopmentConfig)
 
 # initialize db
 # db = SQLAlchemy(app)
@@ -61,8 +62,9 @@ app = Flask(__name__)
 # app.route is an attribute of the app object above
 @app.route('/')
 def welcome():
-    # message = tracker.create_app()
-    return "Hello, world"# render_template('welcome.html')
+    message = setup_mod.create_app()
+    return message
+    # return "Hello, world"# render_template('welcome.html')
 
 
 # @app.route('/subcategory/<int:index>')
@@ -146,5 +148,5 @@ def welcome():
 #     else:
 #         return abort(404)
 
-# if __name__ == '__main__':
-#     app.run()
+if __name__ == '__main__':
+    app.run()
