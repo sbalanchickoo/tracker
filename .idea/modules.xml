@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../learning-python/src/MasterData/MasterDataAPI/.idea/MasterDataAPI.iml" filepath="$PROJECT_DIR$/../learning-python/src/MasterData/MasterDataAPI/.idea/MasterDataAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Tracker.iml" filepath="$PROJECT_DIR$/.idea/Tracker.iml" />
     </modules>
   </component>

@@ -21,7 +21,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 
-import config
+import tracker.config as config
+# import models.grouping
 # from tracker.config import DevelopmentConfig, ProductionConfig
 # from tracker.config import DevelopmentConfig, ProductionConfig
 import os
@@ -141,3 +142,5 @@ def welcome():
 #     else:
 #         return abort(404)
 
+# if __name__ == '__main__':
+#     app.run()
