@@ -1,59 +1,9 @@
-import run
 import models.grouping as grouping
+import models.expense as expense
+import run
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 
-# from tracker.models.grouping import Grouping
-# from .models.grouping import Grouping
-# from .models.grouping import Grouping
-# from models.grouping import Grouping
-# import tracker
-# import run
-# from run import create_app
-# from tracker import app
-# import models objects so that they will be created if not already exist
-# even though below line is greyed out, it is essential, so that the db objects knows of the models objects
-# from  import grouping, expense
-# db = tracker.db
-# app = run.create_app('default') #
-# appflask run = tracker.app
-# db.create_all()
-# db.session.commit()
-
-
-
-
-# import config
-# import models.grouping
-# from tracker.config import DevelopmentConfig, ProductionConfig
-# from tracker.config import DevelopmentConfig, ProductionConfig
-
-# from setup import create_app
 db, app = run.create_app()
-
-# message = setup_mod.create_app()
-# env refers to the FLASK_ENV environment variable which can be used to determine config that will be used
-# try:
-#     # works on linux
-#     env = os.environ['ENV']
-# except:
-#     # works on windows
-#     env = app.config["ENV"]
-#
-# if env == "production":
-#     app.config.from_object(config.ProductionConfig)
-# elif env == "development":
-#     app.config.from_object(config.DevelopmentConfig)
-
-# initialize db
-# db = SQLAlchemy(app)
-
-
-
-
-
-
-
 
 
 
