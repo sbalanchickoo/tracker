@@ -1,6 +1,4 @@
-# import models.grouping as grouping
-# import models.expense as expense
-from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
+from flask import render_template, abort, jsonify, request, redirect, url_for
 import run
 
 app = run.create_app()
@@ -14,38 +12,6 @@ with app.app_context():
     from models.grouping import Grouping
     from models.expense import Expense
     db.create_all()
-
-
-# app = Flask(__name__)
-#
-# try:
-#     # works on linux
-#     env = os.environ['ENV']
-# except:
-#     # works on windows
-#     env = app.config["ENV"]
-#
-# if env == "production":
-#     app.config.from_object(config.ProductionConfig)
-# elif env == "development":
-#     app.config.from_object(config.DevelopmentConfig)
-#
-# db = SQLAlchemy(app)
-# import models objects(above) so that they will be created if not already exist
-# even though lines are greyed out, they are essential, so that the db objects knows of the models objects
-# import models.expense as expense.Expense
-# import models.grouping as grouping
-#
-
-# # from models.grouping import Grouping
-# from models.expense import Expense
-# db.create_all()
-# db.session.commit()
-
-
-
-
-
 
 
 # the decorator turns this function to a view function

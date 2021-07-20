@@ -20,8 +20,5 @@ def create_app():
 
     from models import db
     db.init_app(app)
-    from models.grouping import Grouping
-    # db.create_all()
-
 
     return app

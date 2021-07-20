@@ -1,5 +1,3 @@
-# from flask_sqlalchemy import SQLAlchemy
-# from tracker import db
 from models import db
 
 
