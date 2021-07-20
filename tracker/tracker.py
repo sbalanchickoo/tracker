@@ -1,32 +1,46 @@
-import os
-import config
+import models.grouping as grouping
+import models.expense as expense
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-# db = SQLAlchemy()
+import run
+
+app = run.create_app()
+from models import db
+with app.app_context():
+    # This should work because we are in an app context.
+
+    # import models objects(above) so that they will be created if not already exist
+    # even though lines are greyed out, they are essential, so that the db objects knows of the models objects
+
+    from models.grouping import Grouping
+    from models.expense import Expense
+    db.create_all()
 
 
-app = Flask(__name__)
-
-try:
-    # works on linux
-    env = os.environ['ENV']
-except:
-    # works on windows
-    env = app.config["ENV"]
-
-if env == "production":
-    app.config.from_object(config.ProductionConfig)
-elif env == "development":
-    app.config.from_object(config.DevelopmentConfig)
-
-db = SQLAlchemy(app)
+# app = Flask(__name__)
+#
+# try:
+#     # works on linux
+#     env = os.environ['ENV']
+# except:
+#     # works on windows
+#     env = app.config["ENV"]
+#
+# if env == "production":
+#     app.config.from_object(config.ProductionConfig)
+# elif env == "development":
+#     app.config.from_object(config.DevelopmentConfig)
+#
+# db = SQLAlchemy(app)
 # import models objects(above) so that they will be created if not already exist
 # even though lines are greyed out, they are essential, so that the db objects knows of the models objects
 # import models.expense as expense.Expense
-import models.grouping as grouping
-from models.expense import Expense
-db.create_all()
-db.session.commit()
+# import models.grouping as grouping
+#
+
+# # from models.grouping import Grouping
+# from models.expense import Expense
+# db.create_all()
+# db.session.commit()
 
 
 
@@ -43,7 +57,7 @@ def welcome():
 
 @app.route('/subcategory/<int:index>')
 def get_grouping(index):
-    result_set = grouping.Grouping.query.filter(grouping.Grouping.id == index).first()
+    result_set = Grouping.query.filter(grouping.Grouping.id == index).first()
 
     if result_set is not None:
         result = result_set.serialize
@@ -58,7 +72,7 @@ def get_grouping(index):
 
 @app.route('/subcategory-list')
 def get_all_grouping():
-    result_set = grouping.Grouping.query.all()
+    result_set = Grouping.query.all()
 
     if result_set is not None:
         result_set_serialized = [i.serialize for i in result_set]

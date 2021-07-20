@@ -1,5 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
-from tracker import db
+# from flask_sqlalchemy import SQLAlchemy
+# from tracker import db
+from models import db
 
 
 class Grouping(db.Model):
