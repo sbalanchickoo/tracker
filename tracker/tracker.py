@@ -1,5 +1,5 @@
-import models.grouping as grouping
-import models.expense as expense
+# import models.grouping as grouping
+# import models.expense as expense
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
 import run
 
@@ -57,7 +57,7 @@ def welcome():
 
 @app.route('/subcategory/<int:index>')
 def get_grouping(index):
-    result_set = Grouping.query.filter(grouping.Grouping.id == index).first()
+    result_set = Grouping.query.filter(Grouping.id == index).first()
 
     if result_set is not None:
         result = result_set.serialize
@@ -87,7 +87,7 @@ def get_all_grouping():
 
 @app.route('/api/subcategory/<int:index>')
 def api_get_grouping(index):
-    result_set = grouping.Grouping.query.filter(grouping.Grouping.id == index).first()
+    result_set = Grouping.query.filter(Grouping.id == index).first()
 
     if result_set is not None:
         result_set_serialized = result_set.serialize
@@ -98,7 +98,7 @@ def api_get_grouping(index):
 
 @app.route('/api/subcategory-list')
 def api_get_all_grouping():
-    result_set = grouping.Grouping.query.all()
+    result_set = Grouping.query.all()
 
     if result_set is not None:
         result = [i.serialize for i in result_set]
@@ -110,8 +110,8 @@ def api_get_all_grouping():
 @app.route('/add-subcategory', methods=['GET', 'POST'])
 def add_grouping():
     if request.method == 'POST':
-        new_grouping = grouping.Grouping(category=request.form['category'], subcategory=request.form['subcategory'])
-        status = grouping.Grouping.add_grouping(new_grouping)
+        new_grouping = Grouping(category=request.form['category'], subcategory=request.form['subcategory'])
+        status = Grouping.add_grouping(new_grouping)
         if status == 'pass':
             return redirect(url_for('get_all_grouping'))
         else:
@@ -122,12 +122,12 @@ def add_grouping():
 
 @app.route('/delete-subcategory/<int:index>', methods=['GET', 'POST'])
 def delete_grouping(index):
-    result_set = grouping.Grouping.query.filter(grouping.Grouping.id == index).first()
+    result_set = Grouping.query.filter(Grouping.id == index).first()
     if result_set is not None:
         result_set_serialized = result_set.serialize
 
         if request.method == 'POST':
-            grouping.Grouping.delete_grouping(result_set_serialized)
+            Grouping.delete_grouping(result_set_serialized)
             return redirect(url_for('get_all_grouping'))
         else:
             return render_template('delete-grouping.html'
